@@ -1,12 +1,12 @@
 /* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
-import {ADD_TODOLIST} from "../actionTypes";
+import {ADD_TODO} from "../actionTypes";
 
 const defaultState = [];
 
-export const todoList = (state = defaultState, action) => {
+export const todo = (state = defaultState, action) => {
   switch (action.type) {
-    case ADD_TODOLIST:
+    case ADD_TODO:
       // payload = [{}]
       return action.payload
     default:

@@ -1,0 +1,2 @@
+console.log(realm, 'realm console')
+console.log('connexion à la base de donnnées réussie')
