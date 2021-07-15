@@ -14,7 +14,7 @@ const Drawer = createDrawerNavigator();
 
 const NavigationApp = ({props}) => (
     <NavigationContainer>
-        <Drawer.Navigator initialRouteName="TodoAdd"
+        <Drawer.Navigator initialRouteName="TodoList"
             // drawerContent={props => <SidebarComponent {...props} />}
         >
             <Drawer.Screen options={{ swipeEnabled: false }} name="TodoAdd" component={TodoAddComponent} />
