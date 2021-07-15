@@ -52,12 +52,13 @@ const databaseOptions = {
 */
 export const insertNewTodoList = (newTodoList) => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
-        let task1;
+        // let task1;
         realm.write(() => {
-            task1 = realm.create(TODOLIST_SCHEMA, newTodoList); // Insertion de tuple
+            // task1 = 
+            realm.create(TODOLIST_SCHEMA, newTodoList); // Insertion de tuple
             resolve(newTodoList);
         });
-        console.log(`created two tasks: ${task1.name} & ${task1.creationDate} &  ${task1.map((task) => task.name + '' + task.done)}`);
+        //console.log(`created two tasks: ${task1.name} & ${task1.creationDate} &  ${task1.map((task) => task.name + '' + task.done)}`);
     }).catch((error) => reject(error));
 })
 

@@ -20,11 +20,11 @@ import {
   } from "native-base";
   import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Feather from 'react-native-vector-icons/Feather';
-import {updateTodoList, deleteTodoList, queryAllTodoList} from '../../database/db';
+import {insertNewTodoList, updateTodoList, deleteTodoList, queryAllTodoList} from '../../database/db';
 import realm from '../../database/db';
 
 export default function TodoListComponent({navigation}) {
-
+    console.log(new Date().toLocaleDateString(), 'date')
     const [todoLists, setTodoLists] = useState([
         // {
         //     id: new Date().getTime(),
@@ -55,25 +55,43 @@ export default function TodoListComponent({navigation}) {
 
     const [inputValue, setInputValue] = useState("");
 
-    const addTodo = () => {}
+    const addTodo = () => {
+        const newTodoList = {
+                id: Math.floor(Date.now() / 1000),
+                name: inputValue,
+                creationDate: new Date().toLocaleDateString(),
+                todos: [
+                    {
+                        id: Math.floor(Date.now() / 1200),
+                        name: "manoush",
+                        done: true,
+                    }
+                ]
+            };
+        insertNewTodoList(newTodoList).then().catch((error) => {
+            alert(`Insert new todoList error ${error}`);
+        });
+    }
+
     const reloadData = () => {
-        queryAllTodoList().then((todoLists) => {
-            console.log(todoLists,`reloadDataX`);
-            setTodoLists(todoLists);
+        queryAllTodoList().then((todoList) => {
+            setTodoLists([todoList]);
+            console.log(todoList,`reloadDataX`);
         }).catch((error) => {
+            console.log(error,`error`);
             setTodoLists({ todoLists: [] });
         });
     }
 
-    // const Item = ({ name, lor }) => (
-    //     <View>
-    //       <Text>{name} {lor}</Text>
-    //     </View>
-    //   );
+    const Item = ({ name, creationDate }) => (
+        <View>
+          <Text>{name} - {creationDate}</Text>
+        </View>
+      );
 
-    //     const renderItem = ({ item }) => (
-    //       <Item name={item.name} lor={item.lor} />
-    //     );
+        const renderItem = ({ item }) => (
+          <Item name={item.name} creationDate={item.creationDate} />
+        );
           
 
     useEffect(()=>{
@@ -108,11 +126,11 @@ export default function TodoListComponent({navigation}) {
             value={inputValue}
             placeholder="Add Item"
           />
-           {/* <FlatList
+           <FlatList
                 data={todoLists}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
-            /> */}
+            />
 
             <VStack>
             {todoLists != [] &&  (
@@ -127,10 +145,10 @@ export default function TodoListComponent({navigation}) {
                         colorScheme="emerald"
                         isChecked={false}
                         //   onChange={() => handleStatusChange(itemI)}
-                        value={item.name}
+                        // value={item.name}
                         >
-                        <Text mx={2} strikeThrough={item.isCompleted}>
-                            {item.name} - {item.creationDate}
+                        <Text mx={2} strikeThrough={false}>
+                          nom :  {item.name} - {item.creationDate}
                         </Text>
                         </Checkbox>
                         <IconButton
