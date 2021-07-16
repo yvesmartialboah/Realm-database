@@ -55,6 +55,7 @@ export default function TodoListComponent({navigation}) {
     // console.log(todoLists,`todoListsXS`);
 
     const [inputValue, setInputValue] = useState("");
+    const [refresh, setRefresh] = useState(false);
 
     const addTodo = () => {
         const newTodoList = {
@@ -97,7 +98,7 @@ export default function TodoListComponent({navigation}) {
 
     useEffect(()=>{
         reloadData();
-    },[inputValue])
+    },[refresh])
 
     return (
         <NativeBaseProvider>
@@ -117,6 +118,7 @@ export default function TodoListComponent({navigation}) {
                 ml={1}
                 onPress={() => {
                   addTodo(inputValue);
+                  setRefresh(!refresh)
                   setInputValue("");
                 }}
     
