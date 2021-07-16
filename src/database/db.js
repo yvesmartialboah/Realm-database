@@ -30,7 +30,7 @@ export const TodoListSchema = {
     properties: {
         id: 'int',
         name: 'string',
-        creationDate: 'date',
+        creationDate: 'string',
         todos: { type: 'list', objectType: TODO_SCHEMA }, // []
     },
 };

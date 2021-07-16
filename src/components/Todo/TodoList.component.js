@@ -24,33 +24,34 @@ import {insertNewTodoList, updateTodoList, deleteTodoList, queryAllTodoList} fro
 import realm from '../../database/db';
 
 export default function TodoListComponent({navigation}) {
-    console.log(new Date().toLocaleDateString(), 'date')
-    const [todoLists, setTodoLists] = useState([
-        // {
-        //     id: new Date().getTime(),
-        //     name: 'xlm',
-        //     creationDate: '15-07-2021',
-        //     todos: [
-        //         {
-        //             id: 152,
-        //             name: 'manoush',
-        //             done: true,
-        //         }
-        //     ], // []
-        // },
-        // {
-        //     id: new Date().getTime() + 2,
-        //     name: 'Lorem',
-        //     creationDate: '15-07-2021',
-        //     todos: [
-        //         {
-        //             id: 152,
-        //             name: 'manoush',
-        //             done: true,
-        //         }
-        //     ], // []
-        // }
-    ]);
+    // console.log(new Date().toLocaleDateString(), 'date')
+    const [todoLists, setTodoLists] = useState([]);
+    // const [todoLists, setTodoLists] = useState([
+    //     {
+    //         id: new Date().getTime(),
+    //         name: 'xlm',
+    //         creationDate: '15-07-2021',
+    //         todos: [
+    //             {
+    //                 id: 152,
+    //                 name: 'manoush',
+    //                 done: true,
+    //             }
+    //         ], // []
+    //     },
+    //     {
+    //         id: new Date().getTime() + 2,
+    //         name: 'Lorem',
+    //         creationDate: '15-07-2021',
+    //         todos: [
+    //             {
+    //                 id: 152,
+    //                 name: 'manoush',
+    //                 done: true,
+    //             }
+    //         ], // []
+    //     }
+    // ]);
     // console.log(todoLists,`todoListsXS`);
 
     const [inputValue, setInputValue] = useState("");
@@ -75,8 +76,8 @@ export default function TodoListComponent({navigation}) {
 
     const reloadData = () => {
         queryAllTodoList().then((todoList) => {
-            setTodoLists([todoList]);
-            console.log(todoList,`reloadDataX`);
+            setTodoLists(todoList);
+            console.log(todoList,`totodoListd ss`);
         }).catch((error) => {
             console.log(error,`error`);
             setTodoLists({ todoLists: [] });
@@ -96,7 +97,7 @@ export default function TodoListComponent({navigation}) {
 
     useEffect(()=>{
         reloadData();
-    },[])
+    },[inputValue])
 
     return (
         <NativeBaseProvider>
@@ -126,14 +127,14 @@ export default function TodoListComponent({navigation}) {
             value={inputValue}
             placeholder="Add Item"
           />
-           <FlatList
+           {/* <FlatList
                 data={todoLists}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
-            />
+            /> */}
 
             <VStack>
-            {todoLists != [] &&  (
+            {todoLists != null &&  (
                   todoLists.map((item, id) => (
                     <HStack
                         w="100%"
@@ -148,7 +149,8 @@ export default function TodoListComponent({navigation}) {
                         // value={item.name}
                         >
                         <Text mx={2} strikeThrough={false}>
-                          nom :  {item.name} - {item.creationDate}
+                          {/* detail :  {item.id}  */}
+                           {item.name} - {item.creationDate}
                         </Text>
                         </Checkbox>
                         <IconButton
