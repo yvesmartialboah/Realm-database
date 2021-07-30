@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import TodoAddComponent from './components/Todo/TodoAdd.component';
+import TodoEditComponent from './components/Todo/TodoEditComponent';
 import TodoListComponent from './components/Todo/TodoList.component';
 // import SidebarComponent from './components/_Shared/Sidebar/index';
 
@@ -18,6 +19,7 @@ const NavigationApp = ({props}) => (
             // drawerContent={props => <SidebarComponent {...props} />}
         >
             <Drawer.Screen options={{ swipeEnabled: false }} name="TodoAdd" component={TodoAddComponent} />
+            <Drawer.Screen options={{ swipeEnabled: false }} name="TodoEdit" component={TodoEditComponent} />
             <Drawer.Screen options={{ swipeEnabled: false }}  name="TodoList" component={TodoListComponent} 
                 // options={{headerLeft: () => null}}
             />

@@ -84,7 +84,7 @@ export const deleteTodoList = (todoListId) => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         realm.write(() => {
             let deletingTodoList = realm.objectForPrimaryKey(TODOLIST_SCHEMA, todoListId); // Suppression de la data sélectionnée
-            Realm.delete(deletingTodoList);
+            realm.delete(deletingTodoList);
             resolve();
         });
     }).catch((error) => reject(error));
@@ -98,7 +98,7 @@ export const deleteAllTodoList = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         realm.write(() => {
             let allTodoLists = realm.objects(TODOLIST_SCHEMA);
-            Realm.delete(allTodoLists);
+            realm.delete(allTodoLists);
             resolve();
         });
     }).catch((error) => reject(error));

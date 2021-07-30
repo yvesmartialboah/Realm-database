@@ -78,10 +78,20 @@ export default function TodoListComponent({navigation}) {
     const reloadData = () => {
         queryAllTodoList().then((todoList) => {
             setTodoLists(todoList);
-            console.log(todoList,`totodoListd ss`);
+            // console.log(todoList,`totodoListd ss`);
         }).catch((error) => {
             console.log(error,`error`);
             setTodoLists({ todoLists: [] });
+        });
+    }
+
+    const deletedOneData = (id) => {
+        console.log(id,`id simple`);
+      deleteTodoList(id).then((res) => {
+          reloadData()
+            console.log(res,`id res`);
+        }).catch((error) => {
+            console.log(error,`error`);
         });
     }
 
@@ -158,6 +168,11 @@ export default function TodoListComponent({navigation}) {
                         <IconButton
                         colorScheme="emerald"
                         icon={<Icon as={FontAwesome5} name="trash" size={5} />}
+                          onPress={() => deletedOneData(item.id)}
+                        />
+                        <IconButton
+                        colorScheme="emerald"
+                        icon={<Icon as={FontAwesome5} name="edit" size={5} />}
                         //   onPress={() => handleDelete(itemI)}
                         />
                     </HStack>

@@ -7,11 +7,11 @@ import { Text, View } from 'react-native';
 import { Stack, Center, Heading, IconButton, Icon, Button, NativeBaseProvider } from "native-base"
 import Feather from 'react-native-vector-icons/Feather';
 
-export default function TodoAddComponent ({navigation}) {
+export default function TodoEditComponent ({navigation}) {
     return (
         <NativeBaseProvider>
             <IconButton onPress={()=>{navigation.toggleDrawer()}} icon={<Icon size="xs" as={<Feather name="menu" size={24} color="black" />} color="orange" />} />
-            <Text>TodoAddComponent</Text>
+            <Text>TodoEditComponent</Text>
         </NativeBaseProvider>
     )
 }
