@@ -23,7 +23,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {insertNewTodoList, updateTodoList, deleteAllTodoList, deleteTodoList, queryAllTodoList} from '../../database/db';
 import realm from '../../database/db';
 
-export default function TodoListComponent({navigation}) {
+export default function TodoListComponent({navigation, route}) {
     // console.log(new Date().toLocaleDateString(), 'date')
     const [todoLists, setTodoLists] = useState([]);
     // const [todoLists, setTodoLists] = useState([
@@ -53,6 +53,9 @@ export default function TodoListComponent({navigation}) {
     //     }
     // ]);
     // console.log(todoLists,`todoListsXS`);
+    // console.log('route.params.refresh', route.params.refresh)
+
+   
 
     const [inputValue, setInputValue] = useState("");
     const [refresh, setRefresh] = useState(false);
@@ -189,7 +192,10 @@ export default function TodoListComponent({navigation}) {
                         <IconButton
                         colorScheme="emerald"
                         icon={<Icon as={FontAwesome5} name="edit" size={5} />}
-                        //   onPress={() => handleDelete(itemI)}
+                          onPress={() => navigation.navigate('TodoEdit',{
+                            id: item.id,
+                            name: item.name
+                          })}
                         />
                     </HStack>
                     ))
