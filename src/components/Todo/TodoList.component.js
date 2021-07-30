@@ -3,7 +3,7 @@
 /* eslint-disable semi */
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, TouchableOpacity } from 'react-native';
 import {
     Stack, 
     Input,
@@ -20,7 +20,7 @@ import {
   } from "native-base";
   import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Feather from 'react-native-vector-icons/Feather';
-import {insertNewTodoList, updateTodoList, deleteTodoList, queryAllTodoList} from '../../database/db';
+import {insertNewTodoList, updateTodoList, deleteAllTodoList, deleteTodoList, queryAllTodoList} from '../../database/db';
 import realm from '../../database/db';
 
 export default function TodoListComponent({navigation}) {
@@ -95,6 +95,14 @@ export default function TodoListComponent({navigation}) {
         });
     }
 
+    const deletedAllData = () => {
+      deleteAllTodoList().then((res) => {
+        reloadData()
+      }).catch((error) => {
+          console.log(error,`error`);
+      });
+  }
+
     const Item = ({ name, creationDate }) => (
         <View>
           <Text>{name} - {creationDate}</Text>
@@ -116,6 +124,14 @@ export default function TodoListComponent({navigation}) {
 
         <Center flex={1}>
           <Heading textAlign={'center'} color="emerald.400">Todo App with Realm database</Heading>
+
+          <TouchableOpacity 
+            onPress={()=>{
+              deletedAllData()
+            }}
+          >
+            <Text>supprimer Tout </Text>
+          </TouchableOpacity>
         <VStack space={4} flex={1} w="90%" mt={4}>
 
           <Input
